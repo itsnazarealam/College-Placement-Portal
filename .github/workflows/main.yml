@@ -1,4 +1,4 @@
-name: Deploy React App to Vercel
+name: Deploy to Vercel
 
 on:
   push:
@@ -10,25 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout repository
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      # Setup Node.js
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
-
-      # Install dependencies
-      - name: Install dependencies
-        run: npm ci
-
-      # Build React application
-      - name: Build React app
-        run: npm run build
-
-      # Deploy to Vercel using Deploy Hook
       - name: Trigger Vercel Deployment
-        run: curl -X POST "${{ secrets.VERCEL_DEPLOY_HOOK }}"
+        run: |
+          curl -X POST "${{ secrets.VERCEL_DEPLOY_HOOK }}"
